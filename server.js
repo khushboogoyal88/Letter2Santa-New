@@ -11,8 +11,13 @@ dotenv.config({ path: './config/config.env' });
 //connect to Mongo DB
 connectDB();
 
+const letters = require('./routes/letters');
+
 const app = express();
 
+app.use(express.json());
+
+app.use('/api/v1/letters', letters);
 
 // Bodyparser middleware
 app.use(bodyParser.json());

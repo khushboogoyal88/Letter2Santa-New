@@ -11,7 +11,8 @@ const LetterSchema = new mongoose.Schema({
         required: [true, 'Please add your age']
     },
     pic: {
-        type: String
+        type: String,
+        required: [true, 'Please add your pic']
     },
     isNice: {
         type: String,
