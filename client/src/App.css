@@ -1,0 +1,23 @@
+html, body{
+    background: url('./img/bg.jpeg') no-repeat center center/cover;
+    height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+.wrapper{
+    max-width: 1000px;
+    margin: auto auto;
+    background-color: #eee;
+    min-height: 80vh;
+    
+}
+
+.fade-exit{
+    opacity:1;
+}
+
+.fade-exit-active{
+    opacity:0.01;
+    transition: opacity 1000ms ease-in;
+}
