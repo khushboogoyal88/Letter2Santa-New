@@ -1,6 +1,10 @@
 {
   "name": "letter2santa-new",
   "version": "1.0.0",
+  "engines": {
+    "node": "14.14.0",
+    "npm": "6.14.8"
+  },
   "description": "An application which sends your letter to Santa",
   "main": "server.js",
   "scripts": {
