@@ -4,7 +4,6 @@ import AppNavbar from "./components/AppNavbar"
 import LetterForm from "./components/LetterForm"
 import LetterGrid from "./components/LettersGrid"
 import axios from "axios";
-import uuid from 'uuid';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import './App.css';
 
