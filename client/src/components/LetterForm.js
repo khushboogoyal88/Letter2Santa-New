@@ -31,7 +31,7 @@ const LetterForm = ({ submit, change }) => {
         <Input type="textarea" name="message" required onChange={change} style={{ height: "200px" }} placeholder="Dear Santa" />
         </FormGroup>
         <FormGroup check className="pt-3">
-        <Input type="checkbox" name="isNice"
+        <Input type="checkbox" required name="isNice"
         onChange={change}/>
         <Label for="exampleCheck" check>Have you been nice this year?</Label>
         </FormGroup>

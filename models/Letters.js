@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const LetterSchema = new mongoose.Schema({
-    name: {
+    fullname: {
         type: String,
         trim: true,
         required: [true, 'Please add your name']

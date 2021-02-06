@@ -1,4 +1,4 @@
-import React, { Fragment, useState} from "react";
+import React, { Fragment, useState, useEffect} from "react";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import AppNavbar from "./components/AppNavbar"
 import LetterForm from "./components/LetterForm"
@@ -9,42 +9,11 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import './App.css';
 
 const App = () => {
-  const [letters, setLetters] = useState([
-    {
-      _id: 1,
-      fullname: "Khushboo",
-      age: "5",
-      pic: "http://source.unsplash.com/GagC07wVvck/1600x900",
-      isNice: "yes",
-      present: "toy",
-      message: "Hello Santa"
-    },
-    {
-      _id: 2,
-      fullname: "Deepesh",
-      age: "5",
-      pic: "http://source.unsplash.com/GagC07wVvck/1600x900",
-      isNice: "yes",
-      present: "toy",
-      message: "Hello Santa"
-    },
-    {
-      _id: 3,
-      fullname: "Mayank",
-      age: "5",
-      pic: "http://source.unsplash.com/GagC07wVvck/1600x900",
-      isNice: "yes",
-      present: "toy",
-      message: "Hello Santa"
-    },
-    
-    
-  ]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [query, setQuery] = useState("");
+  const [letters, setLetters] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [modal, setModal] = useState(true);
   
   const [letter, setLetter] = useState({
-    id: "",
     fullname: "",
     age: "",
     pic: "",
@@ -52,6 +21,24 @@ const App = () => {
     present: "",
     message: "",
   });
+  
+  useEffect(() => {
+    const fetchItems = () => {
+      axios.get(`api/v1/letters/`)
+      .then((res) => {
+        const data = res.data.data;
+        setLetters(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+      
+      setIsLoading(false);
+    };
+    
+    fetchItems();
+  }, []);
+  
   
   const changeHandler = (e) => {
     setLetter({
@@ -64,20 +51,21 @@ const App = () => {
   const submitHandler = (e) => {
     e.preventDefault()
     if (window.confirm("Should we send your letter to Santa?")) {
-      const _id = Math.floor(Math.random() * 10000) + 1;
-      const newLetter = { _id, ...letter };
-      setLetters([...letters, newLetter])
+      // const _id = Math.floor(Math.random() * 10000) + 1;
+      // const newLetter = { _id, ...letter };
+      // setLetters([...letters, newLetter])
+      axios.post("api/v1/letters/", letter);
+      window.location.reload();
     }
   };
   
   const removeLetter = (_id) => {
-    console.log(_id);
-    setLetters(letters.filter(letter=>letter._id !==_id))
-    // axios.delete(`api/v1/letters/${_id}`).then((resp) => {
-    //   const data = resp.data;
-    //   setLetters(data);
-    // });
-    // window.location.reload();
+    // setLetters(letters.filter(letter=>letter._id !==_id))
+    axios.delete(`api/v1/letters/${_id}`).then((resp) => {
+      const data = resp.data;
+      setLetters(data);
+    });
+    window.location.reload();
   };
   return (
     <Router>
@@ -87,7 +75,7 @@ const App = () => {
     <Route exact path="/">
     <Fragment>
     <LetterForm change={changeHandler}
-    submit={submitHandler}/>
+    submit={submitHandler} modal={modal}/>
     </Fragment>
     </Route>
     <Route path="/letters">
