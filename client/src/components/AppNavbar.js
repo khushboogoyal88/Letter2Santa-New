@@ -19,7 +19,7 @@ class AppNavbar extends Component{
             <div>
             <Navbar color="danger" success expand="sm" className="mb-5">
             <Container>
-            <NavbarBrand href="/">LetterToSanta</NavbarBrand>
+            <NavbarBrand href="/">Letter2Santa-2</NavbarBrand>
             <NavbarToggler onClick={this.toogle} />
             <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
